@@ -7,7 +7,7 @@ let noseh    = 8;
 
  
 
-
+// THIS FILE IS THE RIGHT ONE
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(DEVELOP_GLYPH);
@@ -37,7 +37,6 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     ellipse(-headd/2+10,-headd/2+10,eard,eard);
     ellipse(headd/2-10,-headd/2+10,eard,eard);
     // EYEBALLS
-    console.log(eyed: "+ eyed);
     fill(255); // white eye base 
     ellipse(-15,-5,eyed+4,eyed+4);
     ellipse(15,-5,eyed+4,eyed+4);
