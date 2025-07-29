@@ -1,6 +1,12 @@
 //your parameter variables go here!
-let rect_width  = 20;
-let rect_height = 30;
+let headd    = 80;   
+let eard     = 25;   
+let eyed     = 12;    
+let nosew    = 10;   
+let noseh    = 8;     
+
+ 
+
 
 
 function setup_wallpaper(pWallpaper) {
@@ -21,5 +27,38 @@ function wallpaper_background() {
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
-  rect(40 ,40, rect_width, rect_height);
+   push();
+    translate(100,100); // center the bear
+    noStroke();
+    fill(100); // soft grey-brown
+    // head
+    ellipse(0, 0,headd,headd);
+    // ears
+    ellipse(-headd/2+10,-headd/2+10,eard,eard);
+    ellipse(headd/2-10,-headd/2+10,eard,eard);
+    // EYEBALLS
+    console.log(eyed: "+ eyed);
+    fill(255); // white eye base 
+    ellipse(-15,-5,eyed+4,eyed+4);
+    ellipse(15,-5,eyed+4,eyed+4);
+    // eyes
+    fill(0);
+    ellipse(-15,-5,eyed,eyed);
+    ellipse(15,-5,eyed,eyed);
+    // nose
+    fill(40);
+    ellipse(0,15,nosew,noseh);
+    // mouth
+    stroke(40);
+    line(0,20,0,25);
+    // smiling arc
+    noFill();
+    stroke(40);
+    strokeWeight(2);
+    arc(0,20,20,10,0,180);
+
+
+   pop();
 }
+
+
