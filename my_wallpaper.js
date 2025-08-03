@@ -1,11 +1,9 @@
 //your parameter variables go here!
 let headd    = 80;   
 let eard     = 25;   
-let eyed     = 12;    
+let eyed     = 40;    
 let nosew    = 10;   
 let noseh    = 8;     
-
- 
 
 // THIS FILE IS THE RIGHT ONE
 
