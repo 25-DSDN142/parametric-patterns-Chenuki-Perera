@@ -1,7 +1,7 @@
 //your parameter variables go here!
 let headd    = 80;   
 let eard     = 25;   
-let eyed     = 40;    
+let eyed     = 12;    
 let nosew    = 10;   
 let noseh    = 8;     
 
