@@ -1,14 +1,14 @@
 //your parameter variables go here!
 let headd    = 80;   
 let eard     = 25;   
-let eyed     = 12;    
+let eyed     = 22;    
 let nosew    = 10;   
 let noseh    = 8;     
 
 // THIS FILE IS THE RIGHT ONE
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER);
   //pWallpaper.output_mode(GRID_WALLPAPER);
   
   pWallpaper.resolution(FIT_TO_SCREEN);
