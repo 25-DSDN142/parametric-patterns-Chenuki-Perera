@@ -1,149 +1,89 @@
-//your parameter variables go here!
-let head_w     = 60;
-let head_h     = 80;
-let ear_w      = 20;
-let ear_h      = 30;
-let eye_w      = 8;
-let eye_h      = 10;
-let swirl_size = 12;
-let border_gap = 80;
-
-
-// THIS FILE IS THE RIGHT ONE
+let strawberrySize = 70;
+let leafColor;
+let strawberryColor;
+let flowerColor;
+let seedColor; 
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(DEVELOP_GLYPH);
-  //pWallpaper.output_mode(GRID_WALLPAPER);
-  
   pWallpaper.resolution(FIT_TO_SCREEN);
-  pWallpaper.show_guide(true); //set this to false when you're ready to print
+  pWallpaper.show_guide(true);
 
-  //Grid settings
-  pWallpaper.grid_settings.cell_width  = 200;
+  
+  pWallpaper.grid_settings.cell_width = 200;
   pWallpaper.grid_settings.cell_height = 200;
-  pWallpaper.grid_settings.row_offset  = 50;
+  pWallpaper.grid_settings.row_offset = 50;
+
+  
+  strawberryColor = color(69, 12, 33, 1)
+  leafColor = color(45, 130, 55); 
+  flowerColor = color(255); 
+  seedColor = color(255, 255, 255, 180); 
 }
 
 function wallpaper_background() {
-  background(240, 255, 240); //light honeydew green colour
-
-   // Subtle background pattern (optional watermark wolf silhouettes)
-  push();
-    stroke(230);
-    fill(230);
-    for (let x = 0; x < width; x += 100) {
-      for (let y = 0; y < height; y += 100) {
-        push();
-          translate(x, y);
-          scale(0.3);
-          draw_wolf_silhouette(); // simplified, light version
-        pop();
-      }
-
-  }
+  background(255, 204, 217); 
 }
-function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
+
+function my_symbol() {
+  drawStrawberry(100, 100, strawberrySize);
+  drawFlower(40, 50, 8);
+  drawFlower(140, 30, 6);
+  drawFlower(60, 140, 6);
+  drawStrawberry(150, 150, 40);
+  drawStrawberry(40, 160, 30);
+}
+
+
+
+function drawStrawberry(x, y, size) {
   push();
-  translate(100, 100); // center of the cell
-
-  // HEAD OUTLINE
-  stroke(50);
-  strokeWeight(1.5);
-  noFill();
-  beginShape();
-    vertex(-head_w / 2, -head_h / 2 + 10);
-    vertex(0, -head_h / 2);
-    vertex(head_w / 2, -head_h / 2 + 10);
-    vertex(head_w / 2 - 10, head_h / 2);
-    vertex(0, head_h / 2 + 10);
-    vertex(-head_w / 2 + 10, head_h / 2);
-  endShape(CLOSE);
-
-  // INNER FLAME LINES
-  stroke(50);
-  noFill();
-  for (let i = -1; i <= 1; i += 2) {
-    beginShape();
-      vertex(0, -head_h / 2 + 5);
-      vertex(5 * i, -head_h / 2 + 15);
-      vertex(0, -head_h / 2 + 25);
-      vertex(5 * i, -head_h / 2 + 35);
-      vertex(0, -head_h / 2 + 45);
-    endShape();
-  }
-
-  // EARS
-  stroke(50);
-  fill(245, 235, 220);
-  triangle(-head_w/2, -head_h/2 + 10, -head_w/2 + 10, -head_h/2 - ear_h, -head_w/2 + 20, -head_h/2 + 10);
-  triangle(head_w/2, -head_h/2 + 10, head_w/2 - 10, -head_h/2 - ear_h, head_w/2 - 20, -head_h/2 + 10);
-
-  // EYES – almond shaped
-  fill(0);
+  translate(x, y);
   noStroke();
+
+  
+  fill(strawberryColor);
   beginShape();
-    vertex(-20, -8);
-    bezierVertex(-15, -15, -5, -15, -10, -8);
-    bezierVertex(-5, 0, -15, 0, -20, -8);
-  endShape(CLOSE);
-  beginShape();
-    vertex(20, -8);
-    bezierVertex(15, -15, 5, -15, 10, -8);
-    bezierVertex(5, 0, 15, 0, 20, -8);
+  vertex(0, -size / 2.5);
+  bezierVertex(size / 2, -size / 2, size / 2.5, size / 2, 0, size / 2);
+  bezierVertex(-size / 2.5, size / 2, -size / 2, -size / 2, 0, -size / 2.5);
   endShape(CLOSE);
 
-  // NOSE – small dark triangle
-  fill(50);
-  triangle(-5, 10, 5, 10, 0, 18);
+  
+  fill(255, 255, 255, 180);
+  ellipse(size * 0.15, -size * 0.15, size * 0.2, size * 0.3);
 
-  // BORDER VINES
-  stroke(60);
-  noFill();
-  for (let x = -border_gap; x <= border_gap; x += 2 * border_gap) {
-    for (let y = -border_gap; y <= border_gap; y += 2 * border_gap) {
-      push();
-        translate(x, y);
-        rotate(PI / 4);
-        // Vine curve
-        beginShape();
-          vertex(0, 0);
-          bezierVertex(10, -10, 20, 10, 30, 0);
-        endShape();
-        // Leaf detail
-        beginShape();
-          vertex(15, 0);
-          bezierVertex(18, -5, 22, -5, 25, 0);
-          bezierVertex(22, 5, 18, 5, 15, 0);
-        endShape();
-      pop();
-    }
+  
+  fill(seedColor);
+  for (let i = 0; i < 10; i++) {
+    let angle = random(TWO_PI);
+    let r = size * 0.2 + random(size * 0.1);
+    ellipse(r * cos(angle), r * sin(angle), 3, 5);
   }
 
-  // DIAMOND MOTIFS – mid edges
-  fill(50);
-  noStroke();
-  for (let angle = 0; angle < TWO_PI; angle += HALF_PI) {
-    push();
-      rotate(angle);
-      translate(0, -border_gap);
-      rotate(PI / 4);
-      rect(-5, -5, 10, 10);
-    pop();
+  
+  fill(leafColor);
+  for (let i = 0; i < 3; i++) {
+    ellipse(
+      cos((i * TWO_PI) / 3) * size * 0.2,
+      -size * 0.5,
+      size * 0.3,
+      size * 0.2
+    );
   }
-
   pop();
 }
 
-// Optional simplified silhouette for background watermark
-function draw_wolf_silhouette() {
-  stroke(200);
-  noFill();
-  beginShape();
-    vertex(-head_w/2, -head_h/2 + 10);
-    vertex(0, -head_h/2);
-    vertex(head_w/2, -head_h/2 + 10);
-    vertex(head_w/2 - 10, head_h/2);
-    vertex(0, head_h/2 + 10);
-    vertex(-head_w/2 + 10, head_h/2);
-  endShape(CLOSE);
+function drawFlower(x, y, petalSize) {
+  push();
+  translate(x, y);
+  fill(flowerColor);
+  noStroke();
+  for (let i = 0; i < 6; i++) {
+    ellipse(0, petalSize, petalSize, petalSize * 1.2);
+    rotate(PI / 3);
+  }
+  pop();
 }
+
+
