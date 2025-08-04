@@ -2,12 +2,13 @@ let strawberrySize = 70;
 let leafColor;
 let strawberryColor;
 let flowerColor;
-let seedColor; 
+let seedColor;
+
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER);
   pWallpaper.resolution(FIT_TO_SCREEN);
-  pWallpaper.show_guide(true);
+  pWallpaper.show_guide(false);
 
   
   pWallpaper.grid_settings.cell_width = 200;
@@ -15,10 +16,16 @@ function setup_wallpaper(pWallpaper) {
   pWallpaper.grid_settings.row_offset = 50;
 
   
-  strawberryColor = color(69, 12, 33, 1)
+  strawberryColor = color(128, 0, 32, 1);
   leafColor = color(45, 130, 55); 
   flowerColor = color(255); 
   seedColor = color(255, 255, 255, 180); 
+
+  
+  shineWidthFactor = 0.2;       
+  shineHeightFactor = 0.3;      
+  seedBaseRadius = 0.2;        
+  leafSizeFactor = 0.3;        
 }
 
 function wallpaper_background() {
@@ -49,15 +56,15 @@ function drawStrawberry(x, y, size) {
   bezierVertex(-size / 2.5, size / 2, -size / 2, -size / 2, 0, -size / 2.5);
   endShape(CLOSE);
 
-  
+ 
   fill(255, 255, 255, 180);
-  ellipse(size * 0.15, -size * 0.15, size * 0.2, size * 0.3);
+  ellipse(size * 0.15, -size * 0.15, size * shineWidthFactor, size * shineHeightFactor);
 
-  
+ 
   fill(seedColor);
   for (let i = 0; i < 10; i++) {
     let angle = random(TWO_PI);
-    let r = size * 0.2 + random(size * 0.1);
+    let r = size * seedBaseRadius + random(size * 0.1);
     ellipse(r * cos(angle), r * sin(angle), 3, 5);
   }
 
@@ -67,7 +74,7 @@ function drawStrawberry(x, y, size) {
     ellipse(
       cos((i * TWO_PI) / 3) * size * 0.2,
       -size * 0.5,
-      size * 0.3,
+      size * leafSizeFactor,
       size * 0.2
     );
   }
@@ -85,5 +92,3 @@ function drawFlower(x, y, petalSize) {
   }
   pop();
 }
-
-
